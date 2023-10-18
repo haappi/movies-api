@@ -1,0 +1,9 @@
+# just a reference for me lol
+
+https://rapidapi.com/rapihub-rapihub-default/api/imdb-top-100-movies/
+https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/streaming-availability/
+https://rapidapi.com/SAdrian/api/moviesdatabase/
+https://rapidapi.com/linaspurinis/api/mdblist/
+
+https://www.omdbapi.com/
+https://developer.themoviedb.org/docs  # such a w api
