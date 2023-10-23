@@ -22,9 +22,24 @@ function SearchBar() {
 	const fetchResults = async (queryy) => {
 		setLoading(true);
 		try {
-			const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=42d0ee61c93ca4fd6e3a26cb1e371f65&query=${queryy}&include_adult=false&language=en-US&page=1`);
+			const url = `https://api.themoviedb.org/3/search/movie?api_key=42d0ee61c93ca4fd6e3a26cb1e371f65&query=${queryy}&include_adult=false&language=en-US`;
+
+			const cache = await caches.open('v1');
+			const cachedResponse = await cache.match(queryy);
+			if (cachedResponse) {
+				const data = await cachedResponse.json();
+				setResults(data);
+				setLoading(false);
+				return;
+			}
+
+			const response = await axios.get(url);
 			setResults(response.data);
 			setLoading(false);
+
+			caches.open('v1').then((cache) => {
+				cache.put(queryy, new Response(JSON.stringify(response.data)));
+			});
 		} catch (error) {
 			console.error('Error fetching data:', error);
 			setLoading(false);
